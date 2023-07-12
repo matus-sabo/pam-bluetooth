@@ -17,7 +17,8 @@ linux
 
 ```bash
 gcc -fPIC -fno-stack-protector -c pam_bluetooth.c -o pam_bluetooth.o
-sudo ld -x --shared -o /lib64/security/pam_bluetooth.so pam_bluetooth.o
+ld -x --shared -o pam_bluetooth.so pam_bluetooth.o
+sudo cp pam_bluetooth.so /lib64/security/pam_bluetooth.so
 ```
 
 osx
