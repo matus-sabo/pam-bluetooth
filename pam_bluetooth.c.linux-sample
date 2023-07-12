@@ -13,7 +13,7 @@ PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh, int flags, int argc, const c
 }
 
 PAM_EXTERN int pam_sm_authenticate( pam_handle_t *pamh, int flags,int argc, const char **argv ) {
-	char* mac = ""; //enter mac address of device
+	char* mac = (char *)""; //enter mac address of device
 	char cmd[100] = "";
 	snprintf(cmd, sizeof(cmd), "timeout 5 bluetoothctl -- connect %s > /dev/null 2>&1", mac);
 	system(cmd);

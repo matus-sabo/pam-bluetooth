@@ -13,9 +13,19 @@ Enter the MAC address of the device within the double quotes on line 16 of pam_b
 
 Build the module using the following commands.
 
-`gcc -fPIC -fno-stack-protector -c pam_bluetooth.c`
+linux
 
-`sudo ld -x --shared -o /lib64/security/pam_bluetooth.so pam_bluetooth.o`
+```bash
+gcc -fPIC -fno-stack-protector -c pam_bluetooth.c -o pam_bluetooth.o
+sudo ld -x --shared -o /lib64/security/pam_bluetooth.so pam_bluetooth.o
+```
+
+osx
+
+```bash 
+gcc -fPIC -fno-stack-protector -c pam_bluetooth.c -o pam_bluetooth.o
+ld -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem -dylib -o pam_bluetooth.so pam_bluetooth.o
+```
 
 Add the following line at the top of the relevant config files in /etc/pam.d to use the module to authenticate.
 
@@ -27,3 +37,4 @@ For eg. /etc/pam.d/gdm-password for gdm lockscreen, /etc/pam.d/sudo for sudo.
 
 
 https://fostips.com/no-password-login-ubuntu-fedora-linux-mint/
+
