@@ -13,7 +13,7 @@ Enter the MAC address of the device within the double quotes on line 16 of pam_b
 
 Build the module using the following commands.
 
-linux
+## Linux
 
 ```bash
 gcc -fPIC -fno-stack-protector -c pam_bluetooth.c -o pam_bluetooth.o
@@ -21,22 +21,21 @@ ld -x --shared -o pam_bluetooth.so pam_bluetooth.o
 sudo cp pam_bluetooth.so /lib64/security/pam_bluetooth.so
 ```
 
-osx
+Add the following line at the top of the relevant config files in /etc/pam.d to use the module to authenticate.
+# auth sufficient pam_bluetooth.so
+/etc/pam.d/gdm-password
+
+## OSX
 
 ```bash 
 brew install blueutil coreutils
 gcc -fPIC -fno-stack-protector -c pam_bluetooth.c -o pam_bluetooth.o
 ld -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem -dylib -o pam_bluetooth.so pam_bluetooth.o
+mkdir -p /usr/local/lib/pam
+cp pam_bluetooth.so /usr/local/lib/pam/pam_bluetooth.so
 ```
 
 Add the following line at the top of the relevant config files in /etc/pam.d to use the module to authenticate.
-
-# auth sufficient pam_bluetooth.so user = your_username
-
-For eg. /etc/pam.d/gdm-password for gdm lockscreen, /etc/pam.d/sudo for sudo.
-
-~/Sandbox/Personal/pam-bluetooth/keyring-unlock-gnome.sh
-
-
-https://fostips.com/no-password-login-ubuntu-fedora-linux-mint/
-
+# auth sufficient pam_bluetooth.so
+/etc/pam.d/authorization
+/etc/pam.d/screensaver
