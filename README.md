@@ -24,6 +24,7 @@ sudo cp pam_bluetooth.so /lib64/security/pam_bluetooth.so
 osx
 
 ```bash 
+brew install blueutil coreutils
 gcc -fPIC -fno-stack-protector -c pam_bluetooth.c -o pam_bluetooth.o
 ld -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem -dylib -o pam_bluetooth.so pam_bluetooth.o
 ```
