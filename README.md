@@ -1,17 +1,17 @@
 Intro
 =====
 
-Simple, low effort PAM module to use a bluetooth device to authenticate. No security implications have been considered. Tested on Fedora 38. 
+Simple, low effort PAM module to use a bluetooth device to authenticate. 
+No security implications have been considered. 
+Tested on Fedora 38. 
 
-The device needs to be paired for this module to work. The module will be ignored if the device is not found, and other authentication method can be used. 
-
-Improvements are welcome.
+The device needs to be paired for this module to work. 
+The module will be ignored if the device is not found, and other authentication method can be used. 
 
 Usage
 -----
-Enter the MAC address of the device within the double quotes on line 16 of pam_bluetooth.c
-
-Build the module using the following commands.
+Set the MAC addresses of the devices 
+Set your password
 
 ## Linux
 
@@ -22,7 +22,7 @@ sudo cp pam_bluetooth.so /lib64/security/pam_bluetooth.so
 ```
 
 Add the following line at the top of the relevant config files in /etc/pam.d to use the module to authenticate.
-# auth sufficient pam_bluetooth.so
+# -auth       optional      pam_bluetooth.so
 /etc/pam.d/gdm-password
 
 ## OSX
@@ -36,6 +36,6 @@ cp pam_bluetooth.so /usr/local/lib/pam/pam_bluetooth.so
 ```
 
 Add the following line at the top of the relevant config files in /etc/pam.d to use the module to authenticate.
-# auth sufficient pam_bluetooth.so
+# -auth       optional      pam_bluetooth.so
 /etc/pam.d/authorization
 /etc/pam.d/screensaver
