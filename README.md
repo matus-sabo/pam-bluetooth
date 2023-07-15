@@ -10,7 +10,7 @@ The module will be ignored if the device is not found, and other authentication 
 
 Usage
 -----
-Set the MAC addresses of the devices 
+Set the MAC addresses of allowed paired devices 
 Set your password
 
 ## Linux
@@ -22,20 +22,24 @@ sudo cp pam_bluetooth.so /lib64/security/pam_bluetooth.so
 ```
 
 Add the following line at the top of the relevant config files in /etc/pam.d to use the module to authenticate.
-# -auth       optional      pam_bluetooth.so
-/etc/pam.d/gdm-password
+`-auth       optional      pam_bluetooth.so`
+
+modules
+`/etc/pam.d/gdm-password`
 
 ## OSX
 
 ```bash 
 brew install blueutil coreutils
 gcc -fPIC -fno-stack-protector -c pam_bluetooth.c -o pam_bluetooth.o
-ld -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem -dylib -o pam_bluetooth.so pam_bluetooth.o
+ld -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem -lpam -dylib -o pam_bluetooth.so pam_bluetooth.o
 mkdir -p /usr/local/lib/pam
 cp pam_bluetooth.so /usr/local/lib/pam/pam_bluetooth.so
 ```
 
 Add the following line at the top of the relevant config files in /etc/pam.d to use the module to authenticate.
-# -auth       optional      pam_bluetooth.so
-/etc/pam.d/authorization
-/etc/pam.d/screensaver
+`auth       optional       pam_bluetooth.so`
+
+modules
+`/etc/pam.d/authorization`
+`/etc/pam.d/screensaver`

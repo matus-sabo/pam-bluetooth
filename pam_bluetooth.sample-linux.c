@@ -17,12 +17,12 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
 {
 	const char *const macAddresses[] = {"00:00:00:00:00:00"};
 	int arrLength = sizeof macAddresses / sizeof macAddresses[0];
-	char cmd[100] = "";
+	char cmd[200] = "";
 	for (int i = 0; i < arrLength; i++)
 	{
 		snprintf(cmd, sizeof(cmd), "timeout 5 bluetoothctl connect %s > /dev/null 2>&1", macAddresses[i]);
 		system(cmd);
-		snprintf(cmd, sizeof(cmd), "bluetoothctl info %s | grep -q 'Connected: yes'", macAddresses[i]);
+		snprintf(cmd, sizeof(cmd), "bluetoothctl info %s | grep -q 'Connected: yes' > /dev/null 2>&1", macAddresses[i]);
 		int x = system(cmd);
 		if (x == 0)
 		{
