@@ -27,7 +27,7 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
 		if (x == 0)
 		{
 			pam_set_item(pamh, PAM_AUTHTOK, "password");
-			return PAM_SUCCESS;
+			break;
 		}
 	}
 	return PAM_IGNORE;
