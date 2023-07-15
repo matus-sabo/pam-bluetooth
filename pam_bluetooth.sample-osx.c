@@ -20,7 +20,7 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
 	char cmd[200] = "";
 	for (int i = 0; i < arrLength; i++)
 	{
-		snprintf(cmd, sizeof(cmd), "PATH=$PATH:/usr/local/bin BLUEUTIL_ALLOW_ROOT=1 timeout 5 blueutil --connect %s > /dev/null 2>&1", macAddresses[i]);
+		snprintf(cmd, sizeof(cmd), "PATH=$PATH:/usr/local/bin BLUEUTIL_ALLOW_ROOT=1 timeout 2 blueutil --connect %s > /dev/null 2>&1", macAddresses[i]);
 		system(cmd);
 		snprintf(cmd, sizeof(cmd), "PATH=$PATH:/usr/local/bin BLUEUTIL_ALLOW_ROOT=1 blueutil --info %s | grep -q ', connected' > /dev/null 2>&1", macAddresses[i]);
 		int x = system(cmd);
