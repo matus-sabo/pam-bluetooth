@@ -3,7 +3,7 @@ Intro
 
 Simple, low effort PAM module to use a bluetooth device to authenticate. 
 No security implications have been considered. 
-Tested on Fedora 38. 
+Tested on Fedora 38 and OSX Ventura.
 
 The device needs to be paired for this module to work. 
 The module will be ignored if the device is not found, and other authentication method can be used. 
