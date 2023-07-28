@@ -22,7 +22,7 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
 	{
 		snprintf(cmd, sizeof(cmd), "timeout 2 bluetoothctl connect %s > /dev/null 2>&1", macAddresses[i]);
 		system(cmd);
-		snprintf(cmd, sizeof(cmd), "bluetoothctl info %s | grep 'Connected: yes' > /dev/null 2>&1", macAddresses[i]);
+		snprintf(cmd, sizeof(cmd), "timeout 2 bluetoothctl info %s | grep 'Connected: yes' > /dev/null 2>&1", macAddresses[i]);
 		int x = system(cmd);
 		if (x == 0)
 		{
