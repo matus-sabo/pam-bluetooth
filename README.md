@@ -1,16 +1,15 @@
-Intro
-=====
+# Intro
 
-Simple, low effort PAM module to use a bluetooth device to authenticate. 
-No security implications have been considered. 
+Simple, low effort PAM module to use a bluetooth device to authenticate.
+No security implications have been considered.
 Tested on Fedora 38 and OSX Ventura.
 
-The device needs to be paired for this module to work. 
-The module will be ignored if the device is not found, and other authentication method can be used. 
+The device needs to be paired for this module to work.
+The module will be ignored if the device is not found, and other authentication method can be used.
 
-Usage
------
-Set the MAC addresses of allowed paired devices 
+## Usage
+
+Set the MAC addresses of allowed paired devices
 Set your password
 
 ## Linux
@@ -29,7 +28,7 @@ modules
 
 ## OSX
 
-```bash 
+```bash
 brew install blueutil coreutils
 gcc -fPIC -fno-stack-protector -c pam_bluetooth.c -o pam_bluetooth.o
 ld -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem -lpam -dylib -o pam_bluetooth.so pam_bluetooth.o
