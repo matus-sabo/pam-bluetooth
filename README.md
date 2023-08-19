@@ -25,7 +25,7 @@ Generate pam config line
 
 ```bash
 # controller_mac_address
-pam-bluetooth]$ bluetoothctl list
+bluetoothctl list
 # paired_device_mac_address
 bluetoothctl devices
 

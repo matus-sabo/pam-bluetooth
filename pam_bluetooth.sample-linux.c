@@ -106,7 +106,7 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
 	{
 		return PAM_IGNORE;
 	}
-	snprintf(cmd, sizeof(cmd), "timeout 1 bluetoothctl devices | grep %s > /dev/null 2>&1", opts.allow_mac_address);
+	snprintf(cmd, sizeof(cmd), "timeout 2 bluetoothctl devices | grep %s > /dev/null 2>&1", opts.allow_mac_address);
 	cmd_exit_code = system(cmd);
 	if (cmd_exit_code != 0)
 	{
@@ -114,14 +114,14 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
 	}
 	snprintf(cmd, sizeof(cmd), "timeout 5 bluetoothctl connect %s > /dev/null 2>&1", opts.allow_mac_address);
 	system(cmd);
-	snprintf(cmd, sizeof(cmd), "timeout 1 bluetoothctl info %s | grep 'Connected: yes' > /dev/null 2>&1", opts.allow_mac_address);
+	snprintf(cmd, sizeof(cmd), "timeout 2 bluetoothctl info %s | grep 'Connected: yes' > /dev/null 2>&1", opts.allow_mac_address);
 	cmd_exit_code = system(cmd);
+	snprintf(cmd, sizeof(cmd), "timeout 5 bluetoothctl disconnect %s > /dev/null 2>&1 &", opts.allow_mac_address);
+	system(cmd);
 	if (cmd_exit_code != 0)
 	{
 		return PAM_IGNORE;
 	}
-	snprintf(cmd, sizeof(cmd), "timeout 5 bluetoothctl disconnect %s > /dev/null 2>&1 &", opts.allow_mac_address);
-	system(cmd);
 	char link_key[GET_COMMAND_OUTPUT_SIZE];
 	char password[GET_COMMAND_OUTPUT_SIZE];
 	snprintf(cmd, sizeof(cmd), "runcon -u unconfined_u -r unconfined_r -t unconfined_t cat /var/lib/bluetooth/%s/%s/info | grep -A1 '\\[LinkKey\\]' | tail -n 1", opts.controller_mac_address, opts.allow_mac_address);
